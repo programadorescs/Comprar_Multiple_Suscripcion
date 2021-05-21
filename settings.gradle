@@ -1,0 +1,2 @@
+rootProject.name = "Comprar Multiple suscripcion"
+include ':app'
