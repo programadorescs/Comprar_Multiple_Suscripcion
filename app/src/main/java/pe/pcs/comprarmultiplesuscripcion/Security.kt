@@ -36,6 +36,7 @@ class Security {
                 //Purchase verification failed: missing data
                 return false
             }
+
             val key = generatePublicKey(base64PublicKey)
             return verify(key, signedData, signature)
         }
@@ -73,20 +74,20 @@ class Security {
          */
         fun verify(publicKey: PublicKey?, signedData: String, signature: String?): Boolean {
             val signatureBytes: ByteArray
+
             signatureBytes = try {
                 Base64.decode(signature, Base64.DEFAULT)
             } catch (e: IllegalArgumentException) {
                 //Base64 decoding failed
                 return false
             }
+
             try {
                 val signatureAlgorithm: Signature = Signature.getInstance(SIGNATURE_ALGORITHM)
                 signatureAlgorithm.initVerify(publicKey)
                 signatureAlgorithm.update(signedData.toByteArray())
-                return if (!signatureAlgorithm.verify(signatureBytes)) {
-                    //Signature verification failed
-                    false
-                } else true
+
+                return signatureAlgorithm.verify(signatureBytes)
             } catch (e: NoSuchAlgorithmException) {
                 // "RSA" is guaranteed to be available
                 throw RuntimeException(e)

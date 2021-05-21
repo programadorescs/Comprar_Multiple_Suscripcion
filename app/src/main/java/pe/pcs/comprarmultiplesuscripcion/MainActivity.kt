@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
     var arrayAdapter: ArrayAdapter<String>? = null
     var listView: ListView? = null
     private var billingClient: BillingClient? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -290,6 +290,7 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
                 add("s3")
             }
         }
+
         private val subscribeItemDisplay = ArrayList<String>()
     }
 }
